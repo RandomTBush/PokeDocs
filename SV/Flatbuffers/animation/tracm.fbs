@@ -82,11 +82,16 @@ table TrackBlendShape {
 	unk_4: uint32;
 }
 
+table idktable2 {
+    values: string;
+}
 
 table BlendShapeTimeline {
     config: TrackConfig;
     res_1: uint32;
 	res_2: [TrackBlendShape];
+	res_3: uint32;
+	res_4: [idktable2];
 }
 
 table Track {
