@@ -69,21 +69,35 @@ table TrackBlendshapeInit {
     blendshape_list: [string];
 }
 
+table FixedBlendTrack {
+    value: float;
+}
+table DynamicBlendTrack {
+    value: [float];
+}
+table Framed16BlendTrack {
+	frames: [uint16];
+    value: [float];
+}
+table Framed8BlendTrack {
+	frames: [uint8];
+    value: [float];
+}
+union BlendTrack { FixedBlendTrack, DynamicBlendTrack, Framed16BlendTrack, Framed8BlendTrack }
 table TrackBlendshapeAnim {
-    unk_0: float;
+    key: uint32;
 	values: [float];
 }
 
 table TrackBlendShape {
     name: string;
     init_values: [TrackBlendshapeInit];
-    is_loop: bool;
-    anim_values: TrackBlendshapeAnim;
+    track: BlendTrack;
 	unk_4: uint32;
 }
 
-table idktable2 {
-    values: string;
+table blendtable {
+    name: string;
 }
 
 table BlendShapeTimeline {
@@ -91,7 +105,7 @@ table BlendShapeTimeline {
     res_1: uint32;
 	res_2: [TrackBlendShape];
 	res_3: uint32;
-	res_4: [idktable2];
+	blend_list: [blendtable];
 }
 
 table Track {
@@ -115,6 +129,7 @@ table TRACM {
     tracks: [Track];
     len_1: uint8; //Related to length of tracks?
     len_2: uint8; //Related to length of tracks?
+	unk_4: uint8;
 }
 
 root_type TRACM;
